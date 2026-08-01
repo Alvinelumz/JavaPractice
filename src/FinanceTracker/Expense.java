@@ -26,4 +26,17 @@ public class Expense {
         return category;
     }
 
+    // converting the expense object to string form
+    @Override
+    public String toString()
+    {
+        String expenseView = "Name: " + getName() + "\n" +
+                "Amount: $" + getAmount() + "\n" +
+                "Category: " + getCategory() + "\n"
+                ;
+
+        return expenseView;
+
+    }
+
 }

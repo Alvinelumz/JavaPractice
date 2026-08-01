@@ -14,6 +14,40 @@ public class FinanceTracker {
         kb = new Scanner(System.in);
     }
 
+    // helper methods
+    private String getNameFromUser()
+    {
+        System.out.print("Enter the Name: ");
+        String name = kb.nextLine();
+
+        return name;
+    }
+
+    private double getAmountFromUser()
+    {
+        double amount;
+        do {
+            System.out.print("Enter the Amount: ");
+            amount = kb.nextDouble();
+            kb.nextLine();
+
+            if (amount < 0)
+                System.out.println("Amount cannot be negative. Please try again.");
+
+        } while(amount < 0);
+
+        return amount;
+    }
+
+    private String getCategoryFromUser()
+    {
+        System.out.print("Enter the Category: ");
+        String category = kb.nextLine();
+
+        return category;
+    }
+
+    // adding expenses
     public void addExpense(Expense expense)
     {
         // creating a method to reference the expense to the tracker
@@ -29,10 +63,7 @@ public class FinanceTracker {
         else {
             for (Expense expense : expenses) {
                 //displaying the expenses fields
-                System.out.println("Name: " + expense.getName());
-                System.out.println("Amount: $" + expense.getAmount());
-                System.out.println("Category: " + expense.getCategory());
-                System.out.println();
+                System.out.println(expense);
 
             }
         }
@@ -40,13 +71,9 @@ public class FinanceTracker {
 
     public void createExpense()
     {
-        System.out.println("Name of the expense ?");
-        String name = kb.nextLine();
-        System.out.println("Amount of the expense ?");
-        double amount = kb.nextDouble();
-        kb.nextLine();
-        System.out.println("Category of the expense ?");
-        String category = kb.nextLine();
+        String name = getNameFromUser();
+        double amount = getAmountFromUser();
+        String category = getCategoryFromUser();
         
         Expense expense = new Expense(name, amount, category);
 
@@ -100,10 +127,7 @@ public class FinanceTracker {
             if (searchByC.equalsIgnoreCase(expense.getCategory()))
             {
                 found = true;
-                System.out.println("Name: " + expense.getName());
-                System.out.println("Amount: $" + expense.getAmount());
-                System.out.println("Category: " + expense.getCategory());
-                System.out.println();
+                System.out.println(expense);
             }
         }
 
@@ -115,6 +139,7 @@ public class FinanceTracker {
 
     public void displayMenu()
     {
+        System.out.println("");
         System.out.println("===========================");
         System.out.println("      FINANCE TRACKER      ");
         System.out.println("===========================");
@@ -138,6 +163,7 @@ public class FinanceTracker {
             choice = kb.nextInt();
             kb.nextLine();
 
+            // switch loop for the menu
             switch(choice)
             {
                 case 1:
